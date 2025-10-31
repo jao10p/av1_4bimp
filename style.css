@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.musica-card {
+  background-color: #181818;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.musica-card:hover {
+  transform: scale(1.05);
+}
+
+.musica-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+#lista-de-musicas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}

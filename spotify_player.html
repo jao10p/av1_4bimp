@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Player Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: #000000;
+            width: 240px;
+            padding: 24px 12px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+            .sidebar span {
+                display: none;
+            }
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #b3b3b3;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 4px;
+            transition: color 0.3s;
+        }
+
+        .sidebar-link:hover {
+            color: #ffffff;
+        }
+
+        .sidebar-link.active {
+            color: #1db954;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #282828;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: #3e3e3e;
+        }
+
+        .filter-btn.ativo {
+            background: #1db954;
+        }
+
+        .musicas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 24px;
+        }
+
+        .musica-card {
+            background: #282828;
+            padding: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .musica-card:hover {
+            background: #3e3e3e;
+            transform: translateY(-4px);
+        }
+
+        .musica-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .musica-card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .musica-card p {
+            color: #b3b3b3;
+            font-size: 14px;
+        }
+
+        /* Player */
+        .player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #181818;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #282828;
+        }
+
+        .musica-atual {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 180px;
+        }
+
+        .musica-atual img {
+            width: 56px;
+            height: 56px;
+            border-radius: 4px;
+        }
+
+        .musica-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .musica-info small {
+            color: #b3b3b3;
+        }
+
+        .controles {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .btn-controle {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .btn-controle:hover {
+            color: #ffffff;
+        }
+
+        .btn-controle.principal {
+            font-size: 32px;
+            color: #ffffff;
+        }
+
+        .btn-controle.principal:hover {
+            transform: scale(1.1);
+        }
+
+        .volume-controle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 180px;
+        }
+
+        .volume-slider {
+            width: 100px;
+            -webkit-appearance: none;
+            height: 4px;
+            background: #4d4d4d;
+            border-radius: 2px;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <a href="#" class="sidebar-link active">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </a>
+        <a href="#" class="sidebar-link">
+            <i class="fas fa-search"></i>
+            <span>Buscar</span>
+        </a>
+        <a href="#" class="sidebar-link">
+            <i class="fas fa-book"></i>
+            <span>Sua Biblioteca</span>
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1>Explorar Músicas</h1>
+        <div class="filters" id="filtros">
+            <!-- Filtros serão inseridos via JavaScript -->
+        </div>
+        <div class="musicas-grid" id="lista-de-musicas">
+            <!-- Músicas serão inseridas via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Player -->
+    <footer class="player">
+        <div class="musica-atual">
+            <img src="https://placehold.co/56x56/282828/FFFFFF?text=+" alt="Capa" id="capa-atual">
+            <div class="musica-info">
+                <strong id="titulo-atual">Selecione uma música</strong>
+                <small id="artista-atual">-</small>
+            </div>
+        </div>
+        <div class="controles">
+            <button class="btn-controle" onclick="voltarMusica()">
+                <i class="fas fa-step-backward"></i>
+            </button>
+            <button class="btn-controle principal" id="btn-play" onclick="togglePlay()">
+                <i class="fas fa-play-circle"></i>
+            </button>
+            <button class="btn-controle" onclick="avancarMusica()">
+                <i class="fas fa-step-forward"></i>
+            </button>
+        </div>
+        <div class="volume-controle">
+            <i class="fas fa-volume-up"></i>
+            <input type="range" class="volume-slider" min="0" max="100" value="50">
+        </div>
+    </footer>
+
+    <script>
+        // Dados das músicas
+        const musicas = [
+            {
+                id: 1,
+                titulo: "Shape of You",
+                artista: "Ed Sheeran",
+                capaUrl: "https://placehold.co/180x180/E8115B/FFFFFF?text=POP",
+                genero: "Pop"
+            },
+            {
+                id: 2,
+                titulo: "Sweet Child O' Mine",
+                artista: "Guns N' Roses",
+                capaUrl: "https://placehold.co/180x180/DB1F48/FFFFFF?text=ROCK",
+                genero: "Rock"
+            },
+            {
+                id: 3,
+                titulo: "Chega de Saudade",
+                artista: "João Gilberto",
+                capaUrl: "https://placehold.co/180x180/004369/FFFFFF?text=MPB",
+                genero: "MPB"
+            },
+            {
+                id: 4,
+                titulo: "Strobe",
+                artista: "Deadmau5",
+                capaUrl: "https://placehold.co/180x180/01949A/FFFFFF?text=ELETRONICA",
+                genero: "Eletrônica"
+            },
+            {
+                id: 5,
+                titulo: "Bad Guy",
+                artista: "Billie Eilish",
+                capaUrl: "https://placehold.co/180x180/E8115B/FFFFFF?text=POP",
+                genero: "Pop"
+            },
+            {
+                id: 6,
+                titulo: "Stairway to Heaven",
+                artista: "Led Zeppelin",
+                capaUrl: "https://placehold.co/180x180/DB1F48/FFFFFF?text=ROCK",
+                genero: "Rock"
+            },
+            {
+                id: 7,
+                titulo: "Garota de Ipanema",
+                artista: "Tom Jobim",
+                capaUrl: "https://placehold.co/180x180/004369/FFFFFF?text=MPB",
+                genero: "MPB"
+            },
+            {
+                id: 8,
+                titulo: "Faded",
+                artista: "Alan Walker",
+                capaUrl: "https://placehold.co/180x180/01949A/FFFFFF?text=ELETRONICA",
+                genero: "Eletrônica"
+            }
+        ];
+
+        let musicaAtual = null;
+        let tocando = false;
+        let generoAtivo = "Todos";
+
+        // Gerar botões de filtro de gênero
+        function gerarBotoesFiltro() {
+            const generos = ["Todos", ...new Set(musicas.map(m => m.genero))];
+            const filtrosDiv = document.getElementById("filtros");
+            
+            generos.forEach(genero => {
+                const btn = document.createElement("button");
+                btn.className = `filter-btn ${genero === "Todos" ? "ativo" : ""}`;
+                btn.textContent = genero;
+                btn.onclick = () => filtrarPorGenero(genero);
+                filtrosDiv.appendChild(btn);
+            });
+        }
+
+        // Filtrar músicas por gênero
+        function filtrarPorGenero(genero) {
+            generoAtivo = genero;
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.classList.remove("ativo");
+                if (btn.textContent === genero) btn.classList.add("ativo");
+            });
+            renderizarMusicas();
+        }
+
+        // Renderizar cards de música
+        function renderizarMusicas() {
+            const container = document.getElementById("lista-de-musicas");
+            container.innerHTML = "";
+            
+            const musicasFiltradas = generoAtivo === "Todos" 
+                ? musicas 
+                : musicas.filter(m => m.genero === generoAtivo);
+
+            musicasFiltradas.forEach(musica => {
+                const card = document.createElement("div");
+                card.className = "musica-card";
+                card.innerHTML = `
+                    <img src="${musica.capaUrl}" alt="${musica.titulo}">
+                    <h3>${musica.titulo}</h3>
+                    <p>${musica.artista}</p>
+                `;
+                card.onclick = () => tocarMusica(musica);
+                container.appendChild(card);
+            });
+        }
+
+        // Controles do player
+        function tocarMusica(musica) {
+            musicaAtual = musica;
+            document.getElementById("capa-atual").src = musica.capaUrl;
+            document.getElementById("titulo-atual").textContent = musica.titulo;
+            document.getElementById("artista-atual").textContent = musica.artista;
+            
+            tocando = true;
+            atualizarBotaoPlay();
+        }
+
+        function togglePlay() {
+            if (!musicaAtual) return;
+            tocando = !tocando;
+            atualizarBotaoPlay();
+        }
+
+        function atualizarBotaoPlay() {
+            const btnPlay = document.getElementById("btn-play");
+            btnPlay.innerHTML = tocando 
+                ? '<i class="fas fa-pause-circle"></i>' 
+                : '<i class="fas fa-play-circle"></i>';
+        }
+
+        function voltarMusica() {
+            if (!musicaAtual) return;
+            const index = musicas.findIndex(m => m.id === musicaAtual.id);
+            const anteriorIndex = index > 0 ? index - 1 : musicas.length - 1;
+            tocarMusica(musicas[anteriorIndex]);
+        }
+
+        function avancarMusica() {
+            if (!musicaAtual) return;
+            const index = musicas.findIndex(m => m.id === musicaAtual.id);
+            const proximoIndex = index < musicas.length - 1 ? index + 1 : 0;
+            tocarMusica(musicas[proximoIndex]);
+        }
+
+        // Inicialização
+        window.onload = () => {
+            gerarBotoesFiltro();
+            renderizarMusicas();
+        };
+    </script>
+</body>
+</html>

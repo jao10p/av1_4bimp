@@ -5,19 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - MyMusic</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="login-body">
   <div class="login-container">
-    <h1>🎵 MyMusic</h1>
-    <p>Entre com sua conta</p>
+    <div class="login-header">
+      <i class="fas fa-headphones-alt"></i>
+      <h1>MyMusic</h1>
+      <p>A música mais perto de você</p>
+    </div>
 
-    <form id="loginForm">
-      <input type="text" id="username" placeholder="Usuário" required>
-      <input type="password" id="password" placeholder="Senha" required>
-      <button type="submit">Entrar</button>
+    <form id="loginForm" class="login-form">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Seu usuário" required>
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Sua senha" required>
+      </div>
+
+      <div class="remember-me">
+        <input type="checkbox" id="remember">
+        <label for="remember">Lembrar de mim</label>
+      </div>
+
+      <button type="submit" class="login-button">
+        <span>Entrar</span>
+        <i class="fas fa-arrow-right"></i>
+      </button>
     </form>
 
     <p class="login-msg" id="loginMsg"></p>
+    
+    <div class="login-footer">
+      <p>Credenciais de teste:</p>
+      <p>Usuário: admin | Senha: 1234</p>
+    </div>
   </div>
 
   <script src="login.js"></script>

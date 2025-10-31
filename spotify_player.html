@@ -88,6 +88,39 @@
             margin-bottom: 24px;
         }
 
+        .search-container {
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b3b3b3;
+        }
+
+        #search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 12px 12px 40px;
+            background: #282828;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        #search-input:focus {
+            outline: none;
+            background: #3e3e3e;
+        }
+
+        #search-input::placeholder {
+            color: #b3b3b3;
+        }
+
         .filters {
             display: flex;
             gap: 12px;
@@ -261,6 +294,10 @@
     <!-- Main Content -->
     <main class="main-content">
         <h1>Explorar Músicas</h1>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" placeholder="Buscar músicas ou artistas...">
+        </div>
         <div class="filters" id="filtros">
             <!-- Filtros serão inseridos via JavaScript -->
         </div>
@@ -268,6 +305,9 @@
             <!-- Músicas serão inseridas via JavaScript -->
         </div>
     </main>
+
+    <!-- Audio Player -->
+    <audio id="audio-player"></audio>
 
     <!-- Player -->
     <footer class="player">
@@ -308,9 +348,131 @@
                 id: 1,
                 titulo: "Shape of You",
                 artista: "Ed Sheeran",
-                capaUrl: "https://placehold.co/180x180/E8115B/FFFFFF?text=POP",
+                capaUrl: "https://placehold.co/180x180/E8115B/FFFFFF?text=CAPA",
+                audioUrl: "./audio/pop1.mp3",
                 genero: "Pop"
             },
+            {
+                id: 2,
+                titulo: "Stairway to Heaven",
+                artista: "Led Zeppelin",
+                capaUrl: "https://placehold.co/180x180/DB1F48/FFFFFF?text=CAPA",
+                audioUrl: "./audio/rock1.mp3",
+                genero: "Rock"
+            },
+            {
+                id: 3,
+                titulo: "Chega de Saudade",
+                artista: "João Gilberto",
+                capaUrl: "https://placehold.co/180x180/004369/FFFFFF?text=CAPA",
+                audioUrl: "./audio/mpb1.mp3",
+                genero: "MPB"
+            },
+            {
+                id: 4,
+                titulo: "Strobe",
+                artista: "Deadmau5",
+                capaUrl: "https://placehold.co/180x180/01949A/FFFFFF?text=CAPA",
+                audioUrl: "./audio/eletronica1.mp3",
+                genero: "Eletrônica"
+            },
+            {
+                id: 5,
+                titulo: "Boate Azul",
+                artista: "Bruno & Marrone",
+                capaUrl: "https://placehold.co/180x180/8B4513/FFFFFF?text=CAPA",
+                audioUrl: "./audio/modao1.mp3",
+                genero: "Modão"
+            },
+            {
+                id: 6,
+                titulo: "Baile de Favela",
+                artista: "MC João",
+                capaUrl: "https://placehold.co/180x180/FF69B4/FFFFFF?text=CAPA",
+                audioUrl: "./audio/funk1.mp3",
+                genero: "Funk"
+            },
+            {
+                id: 7,
+                titulo: "Take Five",
+                artista: "Dave Brubeck",
+                capaUrl: "https://placehold.co/180x180/4B0082/FFFFFF?text=CAPA",
+                audioUrl: "./audio/jazz1.mp3",
+                genero: "Jazz"
+            },
+            {
+                id: 8,
+                titulo: "Evidências",
+                artista: "Chitãozinho & Xororó",
+                capaUrl: "https://placehold.co/180x180/CD853F/FFFFFF?text=CAPA",
+                audioUrl: "./audio/sertanejo1.mp3",
+                genero: "Sertanejo Universitário"
+            },
+            {
+                id: 9,
+                titulo: "Bad Guy",
+                artista: "Billie Eilish",
+                capaUrl: "https://placehold.co/180x180/E8115B/FFFFFF?text=CAPA",
+                audioUrl: "./audio/pop2.mp3",
+                genero: "Pop"
+            },
+            {
+                id: 10,
+                titulo: "Sweet Child O' Mine",
+                artista: "Guns N' Roses",
+                capaUrl: "https://placehold.co/180x180/DB1F48/FFFFFF?text=CAPA",
+                audioUrl: "./audio/rock2.mp3",
+                genero: "Rock"
+            },
+            {
+                id: 11,
+                titulo: "Aquarela",
+                artista: "Toquinho",
+                capaUrl: "https://placehold.co/180x180/004369/FFFFFF?text=CAPA",
+                audioUrl: "./audio/mpb2.mp3",
+                genero: "MPB"
+            },
+            {
+                id: 12,
+                titulo: "Levels",
+                artista: "Avicii",
+                capaUrl: "https://placehold.co/180x180/01949A/FFFFFF?text=CAPA",
+                audioUrl: "./audio/eletronica2.mp3",
+                genero: "Eletrônica"
+            },
+            {
+                id: 13,
+                titulo: "Borbulhas de Amor",
+                artista: "Fagner",
+                capaUrl: "https://placehold.co/180x180/8B4513/FFFFFF?text=CAPA",
+                audioUrl: "./audio/modao2.mp3",
+                genero: "Modão"
+            },
+            {
+                id: 14,
+                titulo: "Vai Malandra",
+                artista: "Anitta",
+                capaUrl: "https://placehold.co/180x180/FF69B4/FFFFFF?text=CAPA",
+                audioUrl: "./audio/funk2.mp3",
+                genero: "Funk"
+            },
+            {
+                id: 15,
+                titulo: "What a Wonderful World",
+                artista: "Louis Armstrong",
+                capaUrl: "https://placehold.co/180x180/4B0082/FFFFFF?text=CAPA",
+                audioUrl: "./audio/jazz2.mp3",
+                genero: "Jazz"
+            },
+            {
+                id: 16,
+                titulo: "Telefone Mudo",
+                artista: "Bruno & Marrone",
+                capaUrl: "https://placehold.co/180x180/CD853F/FFFFFF?text=CAPA",
+                audioUrl: "./audio/sertanejo2.mp3",
+                genero: "Sertanejo Universitário"
+            }
+        ];
             {
                 id: 2,
                 titulo: "Sweet Child O' Mine",
@@ -418,14 +580,33 @@
             renderizarMusicas();
         }
 
+        // Buscar músicas
+        function buscarMusicas(termo) {
+            const termoBusca = termo.toLowerCase().trim();
+            const musicasFiltradas = musicas.filter(musica =>
+                musica.titulo.toLowerCase().includes(termoBusca) ||
+                musica.artista.toLowerCase().includes(termoBusca) ||
+                musica.genero.toLowerCase().includes(termoBusca)
+            );
+            renderizarMusicas(musicasFiltradas);
+        }
+
         // Renderizar cards de música
-        function renderizarMusicas() {
+        function renderizarMusicas(musicasParaExibir = null) {
             const container = document.getElementById("lista-de-musicas");
             container.innerHTML = "";
             
-            const musicasFiltradas = generoAtivo === "Todos" 
-                ? musicas 
-                : musicas.filter(m => m.genero === generoAtivo);
+            let musicasFiltradas = musicasParaExibir;
+            if (!musicasFiltradas) {
+                musicasFiltradas = generoAtivo === "Todos" 
+                    ? musicas 
+                    : musicas.filter(m => m.genero === generoAtivo);
+            }
+
+            if (musicasFiltradas.length === 0) {
+                container.innerHTML = '<p style="color: #b3b3b3; text-align: center; width: 100%;">Nenhuma música encontrada</p>';
+                return;
+            }
 
             musicasFiltradas.forEach(musica => {
                 const card = document.createElement("div");
@@ -434,6 +615,7 @@
                     <img src="${musica.capaUrl}" alt="${musica.titulo}">
                     <h3>${musica.titulo}</h3>
                     <p>${musica.artista}</p>
+                    <p class="genero">${musica.genero}</p>
                 `;
                 card.onclick = () => tocarMusica(musica);
                 container.appendChild(card);
@@ -442,19 +624,43 @@
 
         // Controles do player
         function tocarMusica(musica) {
+            const audioPlayer = document.getElementById("audio-player");
+            
+            if (musicaAtual && musicaAtual.id === musica.id) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                    tocando = true;
+                } else {
+                    audioPlayer.pause();
+                    tocando = false;
+                }
+                atualizarBotaoPlay();
+                atualizarEstadoReproducao();
+                return;
+            }
+
             musicaAtual = musica;
             document.getElementById("capa-atual").src = musica.capaUrl;
             document.getElementById("titulo-atual").textContent = musica.titulo;
             document.getElementById("artista-atual").textContent = musica.artista;
             
-            tocando = true;
-            atualizarBotaoPlay();
-            atualizarEstadoReproducao();
-
-            // Atualizar o volume atual
-            const volume = document.querySelector(".volume-slider").value;
-            console.log(`Iniciando reprodução de ${musica.titulo} com volume ${volume}%`);
+            // Configurar e tocar o áudio
+            audioPlayer.src = musica.audioUrl;
+            audioPlayer.volume = document.querySelector(".volume-slider").value / 100;
             
+            const playPromise = audioPlayer.play();
+            if (playPromise) {
+                playPromise.then(() => {
+                    tocando = true;
+                    atualizarBotaoPlay();
+                    atualizarEstadoReproducao();
+                }).catch(error => {
+                    console.log("Erro ao tocar música:", error);
+                    tocando = false;
+                    atualizarBotaoPlay();
+                });
+            }
+
             // Destacar o card da música atual
             document.querySelectorAll(".musica-card").forEach(card => {
                 if (card.querySelector("h3").textContent === musica.titulo) {
@@ -467,17 +673,25 @@
 
         function togglePlay() {
             if (!musicaAtual) return;
-            tocando = !tocando;
+            
+            const audioPlayer = document.getElementById("audio-player");
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                tocando = true;
+            } else {
+                audioPlayer.pause();
+                tocando = false;
+            }
+            
             atualizarBotaoPlay();
             atualizarEstadoReproducao();
-            
-            const volume = volumeSlider.value;
-            console.log(`${tocando ? 'Resumindo' : 'Pausando'} ${musicaAtual.titulo} com volume ${volume}%`);
         }
 
         function atualizarBotaoPlay() {
             const btnPlay = document.getElementById("btn-play");
-            if (tocando) {
+            const audioPlayer = document.getElementById("audio-player");
+            
+            if (!audioPlayer.paused) {
                 btnPlay.innerHTML = '<i class="fas fa-pause-circle"></i>';
                 console.log("Estado: Tocando");
             } else {
@@ -488,24 +702,36 @@
 
         function voltarMusica() {
             if (!musicaAtual) return;
-            const index = musicas.findIndex(m => m.id === musicaAtual.id);
-            const anteriorIndex = index > 0 ? index - 1 : musicas.length - 1;
-            tocarMusica(musicas[anteriorIndex]);
+            
+            let musicasFiltradas = generoAtivo === "Todos" 
+                ? musicas 
+                : musicas.filter(m => m.genero === generoAtivo);
+            
+            const index = musicasFiltradas.findIndex(m => m.id === musicaAtual.id);
+            const anteriorIndex = index > 0 ? index - 1 : musicasFiltradas.length - 1;
+            tocarMusica(musicasFiltradas[anteriorIndex]);
         }
 
         function avancarMusica() {
             if (!musicaAtual) return;
-            const index = musicas.findIndex(m => m.id === musicaAtual.id);
-            const proximoIndex = index < musicas.length - 1 ? index + 1 : 0;
-            tocarMusica(musicas[proximoIndex]);
+            
+            let musicasFiltradas = generoAtivo === "Todos" 
+                ? musicas 
+                : musicas.filter(m => m.genero === generoAtivo);
+            
+            const index = musicasFiltradas.findIndex(m => m.id === musicaAtual.id);
+            const proximoIndex = index < musicasFiltradas.length - 1 ? index + 1 : 0;
+            tocarMusica(musicasFiltradas[proximoIndex]);
         }
 
         // Controle de Volume
         const volumeSlider = document.querySelector(".volume-slider");
         const volumeIcon = document.querySelector(".volume-controle i");
+        const audioPlayer = document.getElementById("audio-player");
 
         volumeSlider.addEventListener("input", (e) => {
             const volume = e.target.value;
+            audioPlayer.volume = volume / 100;
             console.log(`Volume alterado para: ${volume}%`);
             
             // Atualizar ícone do volume baseado no nível
@@ -519,8 +745,8 @@
                 volumeIcon.className = "fas fa-volume-up";
             }
 
-            // Simular alteração do volume na música atual
-            if (musicaAtual && tocando) {
+            // Log de alteração do volume na música atual
+            if (musicaAtual && !audioPlayer.paused) {
                 console.log(`Volume de ${musicaAtual.titulo} alterado para ${volume}%`);
             }
         });
@@ -551,6 +777,17 @@
             const volumeInicial = 50;
             volumeSlider.value = volumeInicial;
             console.log(`Volume inicial configurado para: ${volumeInicial}%`);
+
+            // Configurar busca
+            const campoBusca = document.getElementById("search-input");
+            campoBusca.addEventListener("input", (e) => {
+                const termo = e.target.value;
+                if (termo.length === 0) {
+                    renderizarMusicas();
+                } else {
+                    buscarMusicas(termo);
+                }
+            });
         };
     </script>
 </body>

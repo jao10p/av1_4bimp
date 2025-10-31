@@ -1,37 +1,38 @@
-const usuarioLogado = localStorage.getItem("usuarioLogado");
-if (!usuarioLogado) window.location.href = "login.html";
+// Dados de músicas com capa e artista
+const musicas = {
+  pop: [
+    { titulo: "As It Was", artista: "Harry Styles", capaUrl: "https://i.scdn.co/image/ab67616d0000b27359b3917fba9e0b0a82f54095" },
+    { titulo: "Levitating", artista: "Dua Lipa", capaUrl: "https://i.scdn.co/image/ab67616d0000b27321ff3b8f43a30f8cfac57a3b" },
+    { titulo: "Blinding Lights", artista: "The Weeknd", capaUrl: "https://i.scdn.co/image/ab67616d0000b2737e6d19a1d7ab8b1e33f6c9c1" },
+    { titulo: "Anti-Hero", artista: "Taylor Swift", capaUrl: "https://i.scdn.co/image/ab67616d0000b2738a0b8d29d92f5922a3c581fc" },
+  ],
+  rock: [
+    { titulo: "Bohemian Rhapsody", artista: "Queen", capaUrl: "https://i.scdn.co/image/ab67616d0000b273b5db9b6b9bbefb5e9d3e7cfa" },
+    { titulo: "Smells Like Teen Spirit", artista: "Nirvana", capaUrl: "https://i.scdn.co/image/ab67616d0000b2731d5f6b2d4f6172a42e4c96cd" },
+    { titulo: "Sweet Child O' Mine", artista: "Guns N' Roses", capaUrl: "https://i.scdn.co/image/ab67616d0000b2735e8dbde2c5ec6f7a5f60a7b2" },
+  ],
+  rap: [
+    { titulo: "God's Plan", artista: "Drake", capaUrl: "https://i.scdn.co/image/ab67616d0000b273b8e02b34dff580d54d6d1c4" },
+    { titulo: "Lose Yourself", artista: "Eminem", capaUrl: "https://i.scdn.co/image/ab67616d0000b2731d057bfc3277f09c17347a8d" },
+    { titulo: "SICKO MODE", artista: "Travis Scott", capaUrl: "https://i.scdn.co/image/ab67616d0000b2730cf2f6b5abf41c3c2b4b05f3" },
+  ],
+  eletronica: [
+    { titulo: "Titanium", artista: "David Guetta ft. Sia", capaUrl: "https://i.scdn.co/image/ab67616d0000b2735e27d3b2785fefae5a1ef391" },
+    { titulo: "Animals", artista: "Martin Garrix", capaUrl: "https://i.scdn.co/image/ab67616d0000b27306a8de2fbf8a41e8e01aab4c" },
+    { titulo: "Lean On", artista: "Major Lazer", capaUrl: "https://i.scdn.co/image/ab67616d0000b273d04d0b8f3285d8b3f76b9d0a" },
+  ]
+};
 
-const logoutBtn = document.getElementById("logoutBtn");
-logoutBtn.addEventListener("click", () => {
-  localStorage.removeItem("usuarioLogado");
-  window.location.href = "login.html";
-});
-
-const musicasPop = [
-  { titulo: "Blinding Lights", artista: "The Weeknd", capaUrl: "https://i.scdn.co/image/ab67616d0000b2737e6d19a1d7ab8b1e33f6c9c1" },
-  { titulo: "Levitating", artista: "Dua Lipa", capaUrl: "https://i.scdn.co/image/ab67616d0000b27321ff3b8f43a30f8cfac57a3b" },
-  { titulo: "Stay", artista: "The Kid LAROI & Justin Bieber", capaUrl: "https://i.scdn.co/image/ab67616d0000b273f98e3d73d6e4c5f5f9b3fefd" },
-  { titulo: "Dance Monkey", artista: "Tones and I", capaUrl: "https://i.scdn.co/image/ab67616d0000b2732a9d9eb7cf8dc5ffdf09aee8" },
-  { titulo: "As It Was", artista: "Harry Styles", capaUrl: "https://i.scdn.co/image/ab67616d0000b27359b3917fba9e0b0a82f54095" },
-  { titulo: "Peaches", artista: "Justin Bieber", capaUrl: "https://i.scdn.co/image/ab67616d0000b27301bb87fce484fa6a3f7a1b1f" },
-];
-
-const lancamentos = [
-  { titulo: "Houdini", artista: "Eminem", capaUrl: "https://i.scdn.co/image/ab67616d0000b2732d6f6b5ab57a68f674d7e67d" },
-  { titulo: "Espresso", artista: "Sabrina Carpenter", capaUrl: "https://i.scdn.co/image/ab67616d0000b27315f4b6e5e8f36f5c6b3df4d0" },
-  { titulo: "I Had Some Help", artista: "Post Malone ft. Morgan Wallen", capaUrl: "https://i.scdn.co/image/ab67616d0000b27373eebd34452b9db15e3a2e3c" },
-  { titulo: "Paint The Town Red", artista: "Doja Cat", capaUrl: "https://i.scdn.co/image/ab67616d0000b273e3a546e0d4580edfe1b99b2f" },
-];
-
-const listaPop = document.getElementById("lista-de-musicas");
-const listaLanc = document.getElementById("lista-lancamentos");
 const tocandoAgora = document.getElementById("tocando-agora");
 const playPauseBtn = document.getElementById("playPauseBtn");
+
 let tocando = false;
 
-function renderizar(lista, dados) {
-  lista.innerHTML = "";
-  dados.forEach((m) => {
+// Renderiza os cards
+function renderizarMusicas(categoria, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  musicas[categoria].forEach(m => {
     const card = document.createElement("div");
     card.classList.add("musica-card");
     card.innerHTML = `
@@ -39,12 +40,12 @@ function renderizar(lista, dados) {
       <h3>${m.titulo}</h3>
       <p>${m.artista}</p>
     `;
-    card.addEventListener("click", () => tocar(m));
-    lista.appendChild(card);
+    card.addEventListener("click", () => tocarMusica(m));
+    container.appendChild(card);
   });
 }
 
-function tocar(m) {
+function tocarMusica(m) {
   tocandoAgora.textContent = `🎶 Tocando agora: ${m.titulo} - ${m.artista}`;
   tocando = true;
   playPauseBtn.textContent = "⏸️";
@@ -55,5 +56,19 @@ playPauseBtn.addEventListener("click", () => {
   playPauseBtn.textContent = tocando ? "⏸️" : "▶️";
 });
 
-renderizar(listaPop, musicasPop);
-renderizar(listaLanc, lancamentos);
+renderizarMusicas("pop", "pop-grid");
+renderizarMusicas("rock", "rock-grid");
+renderizarMusicas("rap", "rap-grid");
+renderizarMusicas("eletronica", "eletronica-grid");
+
+// Troca de abas
+const tabs = document.querySelectorAll(".tab");
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelector(".tab.active").classList.remove("active");
+    tab.classList.add("active");
+
+    document.querySelector(".musica-section.active").classList.remove("active");
+    document.getElementById(tab.dataset.tab).classList.add("active");
+  });
+});

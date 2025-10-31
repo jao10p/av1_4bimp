@@ -422,12 +422,30 @@
             
             tocando = true;
             atualizarBotaoPlay();
+            atualizarEstadoReproducao();
+
+            // Atualizar o volume atual
+            const volume = document.querySelector(".volume-slider").value;
+            console.log(`Iniciando reprodução de ${musica.titulo} com volume ${volume}%`);
+            
+            // Destacar o card da música atual
+            document.querySelectorAll(".musica-card").forEach(card => {
+                if (card.querySelector("h3").textContent === musica.titulo) {
+                    card.style.boxShadow = "0 0 0 2px #1db954";
+                } else {
+                    card.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.3)";
+                }
+            });
         }
 
         function togglePlay() {
             if (!musicaAtual) return;
             tocando = !tocando;
             atualizarBotaoPlay();
+            atualizarEstadoReproducao();
+            
+            const volume = volumeSlider.value;
+            console.log(`${tocando ? 'Resumindo' : 'Pausando'} ${musicaAtual.titulo} com volume ${volume}%`);
         }
 
         function atualizarBotaoPlay() {
@@ -451,10 +469,57 @@
             tocarMusica(musicas[proximoIndex]);
         }
 
+        // Controle de Volume
+        const volumeSlider = document.querySelector(".volume-slider");
+        const volumeIcon = document.querySelector(".volume-controle i");
+
+        volumeSlider.addEventListener("input", (e) => {
+            const volume = e.target.value;
+            console.log(`Volume alterado para: ${volume}%`);
+            
+            // Atualizar ícone do volume baseado no nível
+            if (volume == 0) {
+                volumeIcon.className = "fas fa-volume-mute";
+            } else if (volume < 30) {
+                volumeIcon.className = "fas fa-volume-off";
+            } else if (volume < 70) {
+                volumeIcon.className = "fas fa-volume-down";
+            } else {
+                volumeIcon.className = "fas fa-volume-up";
+            }
+
+            // Simular alteração do volume na música atual
+            if (musicaAtual && tocando) {
+                console.log(`Volume de ${musicaAtual.titulo} alterado para ${volume}%`);
+            }
+        });
+
+        // Função para atualizar o estado de reprodução
+        function atualizarEstadoReproducao() {
+            if (musicaAtual) {
+                const estado = tocando ? "Tocando" : "Pausado";
+                console.log(`Estado: ${estado} - ${musicaAtual.titulo} - ${musicaAtual.artista}`);
+                
+                // Atualizar visual do card atual
+                document.querySelectorAll(".musica-card").forEach(card => {
+                    if (card.querySelector("h3").textContent === musicaAtual.titulo) {
+                        card.style.boxShadow = tocando ? "0 0 0 2px #1db954" : "0 4px 8px rgba(0, 0, 0, 0.3)";
+                    } else {
+                        card.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.3)";
+                    }
+                });
+            }
+        }
+
         // Inicialização
         window.onload = () => {
             gerarBotoesFiltro();
             renderizarMusicas();
+
+            // Configurar volume inicial
+            const volumeInicial = 50;
+            volumeSlider.value = volumeInicial;
+            console.log(`Volume inicial configurado para: ${volumeInicial}%`);
         };
     </script>
 </body>

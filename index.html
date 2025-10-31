@@ -3,17 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projeto Músicas</title>
+  <title>MyMusic - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Minhas Músicas</h1>
+  <header class="main-header">
+    <div class="logo">🎧 MyMusic</div>
+    <input type="text" id="search" placeholder="Buscar músicas...">
+    <button id="logoutBtn">Sair</button>
   </header>
 
   <main>
-    <div id="lista-de-musicas"></div>
+    <section class="playlist">
+      <h2>🔥 Músicas Populares</h2>
+      <div id="lista-de-musicas" class="grid"></div>
+    </section>
+
+    <section class="playlist">
+      <h2>🎤 Lançamentos Recentes</h2>
+      <div id="lista-lancamentos" class="grid"></div>
+    </section>
   </main>
+
+  <footer id="player">
+    <p id="tocando-agora">Nenhuma música tocando</p>
+    <button id="playPauseBtn">▶️</button>
+  </footer>
 
   <script src="app.js"></script>
 </body>

@@ -35,6 +35,27 @@
             .sidebar span {
                 display: none;
             }
+            .musica-card {
+                margin: 5px;
+            }
+            .player {
+                padding: 10px;
+            }
+            .volume-controle {
+                display: none;
+            }
+            .musica-atual {
+                min-width: 120px;
+            }
+            .musica-info {
+                max-width: 120px;
+                overflow: hidden;
+            }
+            .musica-info strong, .musica-info small {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
 
         .sidebar-link {
@@ -261,8 +282,14 @@
             <button class="btn-controle" onclick="voltarMusica()">
                 <i class="fas fa-step-backward"></i>
             </button>
+            <button class="btn-controle" onclick="voltarMusica()">
+                <i class="fas fa-step-backward"></i>
+            </button>
             <button class="btn-controle principal" id="btn-play" onclick="togglePlay()">
                 <i class="fas fa-play-circle"></i>
+            </button>
+            <button class="btn-controle" onclick="avancarMusica()">
+                <i class="fas fa-step-forward"></i>
             </button>
             <button class="btn-controle" onclick="avancarMusica()">
                 <i class="fas fa-step-forward"></i>
@@ -450,9 +477,13 @@
 
         function atualizarBotaoPlay() {
             const btnPlay = document.getElementById("btn-play");
-            btnPlay.innerHTML = tocando 
-                ? '<i class="fas fa-pause-circle"></i>' 
-                : '<i class="fas fa-play-circle"></i>';
+            if (tocando) {
+                btnPlay.innerHTML = '<i class="fas fa-pause-circle"></i>';
+                console.log("Estado: Tocando");
+            } else {
+                btnPlay.innerHTML = '<i class="fas fa-play-circle"></i>';
+                console.log("Estado: Pausado");
+            }
         }
 
         function voltarMusica() {

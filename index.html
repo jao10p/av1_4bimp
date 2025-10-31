@@ -3,25 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyMusic - Home</title>
+  <title>MyMusic Premium</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="logo">🎧 MyMusic</div>
-    <input type="text" id="search" placeholder="Buscar músicas...">
-    <button id="logoutBtn">Sair</button>
+  <header>
+    <h1>🎵 MyMusic</h1>
+    <nav>
+      <ul>
+        <li class="tab active" data-tab="pop">Pop</li>
+        <li class="tab" data-tab="rock">Rock</li>
+        <li class="tab" data-tab="rap">Rap</li>
+        <li class="tab" data-tab="eletronica">Eletrônica</li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <section class="playlist">
-      <h2>🔥 Músicas Populares</h2>
-      <div id="lista-de-musicas" class="grid"></div>
+    <!-- POP -->
+    <section id="pop" class="musica-section active">
+      <h2>🎤 Músicas Pop</h2>
+      <div class="grid" id="pop-grid"></div>
     </section>
 
-    <section class="playlist">
-      <h2>🎤 Lançamentos Recentes</h2>
-      <div id="lista-lancamentos" class="grid"></div>
+    <!-- ROCK -->
+    <section id="rock" class="musica-section">
+      <h2>🎸 Rock Clássico</h2>
+      <div class="grid" id="rock-grid"></div>
+    </section>
+
+    <!-- RAP -->
+    <section id="rap" class="musica-section">
+      <h2>🔥 Rap & Hip-Hop</h2>
+      <div class="grid" id="rap-grid"></div>
+    </section>
+
+    <!-- ELETRONICA -->
+    <section id="eletronica" class="musica-section">
+      <h2>🎧 Eletrônica</h2>
+      <div class="grid" id="eletronica-grid"></div>
     </section>
   </main>
 
